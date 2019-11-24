@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button id="load" onclick="sendRequest()" >Load Data</button>
+   <div  id="div">
+        
+   </div>
+  <script>
+   let xhr = new XMLHttpRequest();
+
+   xhr.onreadystatechange = function () {
+   if (xhr.readyState === 4) {
+     let response = JSON.parse(xhr.responseText);
+     for (var i = 0; i < response.length; i++) {
+       let list = document.getElementById('div');
+       
+       list.style.border = '1px solid blue';
+       
+        
+       let listImg = document.createElement('img');     
+      listImg.src += response[i].imageUrl;
+     
+      
+     
+      
+      
+    
+       list.appendChild(listImg);
+      
+
+   
+       let listItem = document.createElement('h4');
+       listItem.style.border = '2px solid brown';
+      
+       listItem.innerText = response[i].name;
+       listItem.style.width = '30%';
+       list.appendChild(listItem);
+   
+       let listText = document.createElement('span');
+       listText.innerText = response[i].text;
+       listText.style.width = '30%';
+       listText.style.border = '2px solid brown';
+       list.appendChild(listText);
+       }
+   }
+       }
+
+
+       xhr.open('GET', 'product.json');
+
+
+function sendRequest(){
+    xhr.send();
+    document.getElementById('load').remove();
+}
+
+
+    </script>
+
+
+
+
+
+
+    
+    
+    
+    
+
+
+
+    
+</body>
+</html>
